@@ -1,7 +1,8 @@
 name: flutter_fbx3d_viewer
 description: Flutter package for viewing Fbx 3d animated files.
 version: 0.0.1
-homepage: https://androidprogramjaim.blog.hu/
+author: Kozári László
+homepage: https://github.com/klaszlo8207/Flutter-FBX-3D-Viewer
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -22,10 +23,9 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
-  # To add assets to your package, add an assets section, like this:
-  assets:
-     - assets/knight_2014.fbx
+      # To add assets to your package, add an assets section, like this:
+    assets:
+    - assets/knight_2014.fbx
   #  - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
@@ -53,3 +53,4 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
+

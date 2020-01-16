@@ -1,3 +1,5 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - Release
 
-* TODO: Describe initial release.
+* Flutter package for viewing FBX 3D animated files
+
+
