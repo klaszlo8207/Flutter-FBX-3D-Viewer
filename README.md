@@ -30,9 +30,9 @@ This library is based on the [dart_fbx](https://github.com/brendan-duncan/dart_f
 
 **path**: you can add an **asset path (fromAsset=true)** or you can add an **SD card path (fromAsset=false)**
 
-**zoom**: How to zoom for the first time.
+**zoom**: Initial zoom.
 
-**showInfo**: Show infos like FPs, and vertices.
+**showInfo**: Show infos like FPS, and vertices.
 
 **rotateX**: Animating the object with a rotateX.
 
@@ -42,7 +42,7 @@ This library is based on the [dart_fbx](https://github.com/brendan-duncan/dart_f
 
 **wireframeColor**: Color of the wireframe.
 
-**initialAngles**: The initial model angles.
+**initialAngles**: Initial model angles.
 
 ## Limits
 
