@@ -95,6 +95,12 @@ Now if everything is went good in the fbx file header you can see this: **; FBX 
 
 **FBX is a closed format, so while this library does it's best to interpret the data in an FBX file, I cannot guarantee that it will read all FBX files, or all data within FBX files.**
 
+**No texture**
+
+**Please don't use this library with a lot of vertices/polygons. Speed will be very low on huge point count.**
+
+Normal speed will be on an fbx that is **max 3000 vertices**. (**Becuse it is draw with the CPU not on the GPU**)
+
 ## Author
 
 **Kozári László** in **2020.01.16**
