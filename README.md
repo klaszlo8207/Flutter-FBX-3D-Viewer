@@ -44,6 +44,45 @@ This library is based on the [dart_fbx](https://github.com/brendan-duncan/dart_f
 
 **initialAngles**: Initial model angles.
 
+## Convert an FBX binary file to an FBX ASCII file that can this library handle
+
+1, First step is to download an animated/rigged fbx binary file from the net:
+
+https://www.turbosquid.com/3d-models/free-female-character-rigged-biped-3d-model/569036
+
+Lets see this model. (you will download **Mixamo-Mia_JoyfulJumpAnimation.fbx  Autodesk FBX  - 6.23 MB**)
+
+2, Second is to load that modell with **AUTODESK MotionBuilder 2020**
+
+You just drop you file to your MotionBuilder then FBX Open -> mixamo.com
+
+3, 
+**Python Tools -> FBX Export on the MotionBuilder**
+
+FBX Version: FBX 2014/2015 -> Export
+
+SAVE -> .fbx (ASCII)
+
+**Embed medias checked only**
+
+Save options:
+
+**Remove: (Settings)**
+
+Base Cameras
+Camera switchers
+Current camera
+Global Lighting
+Transporrt
+
+**Remove: (Scene)**
+
+Cameras (Elemend, Animation)
+
+4, SAVE
+
+Now if everything is went good in the fbx file header you can see this: **; FBX 7.4.0 project file**
+
 ## Limits
 
 **FBX is a closed format, so while this library does it's best to interpret the data in an FBX file, I cannot guarantee that it will read all FBX files, or all data within FBX files.**
