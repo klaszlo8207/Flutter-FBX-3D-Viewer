@@ -50,7 +50,7 @@ This library is based on the [dart_fbx](https://github.com/brendan-duncan/dart_f
 
 https://www.turbosquid.com/3d-models/free-female-character-rigged-biped-3d-model/569036
 
-Lets see this model. (you will download **Mixamo-Mia_JoyfulJumpAnimation.fbx  Autodesk FBX  - 6.23 MB**)
+Lets see this model. (you will download **Mixamo-Joan_InjuredWalkAnimation.fbx  Autodesk FBX  - 4.22 MB**)
 
 2, Second is to load that modell with **AUTODESK MotionBuilder 2020**
 
