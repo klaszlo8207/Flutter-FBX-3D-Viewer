@@ -65,19 +65,27 @@ SAVE -> .fbx (ASCII)
 
 **Embed medias checked only**
 
-Save options:
+**Save options:**
 
 **Remove: (Settings)**
 
 Base Cameras
+
 Camera switchers
+
 Current camera
+
 Global Lighting
-Transporrt
+
+Transport
 
 **Remove: (Scene)**
 
-Cameras (Elemend, Animation)
+Cameras (all)
+
+Textures (all)
+
+Video
 
 4, SAVE
 
