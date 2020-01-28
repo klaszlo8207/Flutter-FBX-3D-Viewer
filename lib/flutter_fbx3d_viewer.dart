@@ -26,7 +26,7 @@ class Fbx3DViewer extends StatefulWidget {
   final bool rotateZ;
   final bool showWireframe;
   final Color wireframeColor;
-  Math.Vector3 initialAngles;
+  final Math.Vector3 initialAngles;
   double zoom;
 
   Fbx3DViewer({

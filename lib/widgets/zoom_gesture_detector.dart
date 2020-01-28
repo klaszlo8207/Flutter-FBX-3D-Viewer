@@ -69,7 +69,7 @@ class _ZoomGestureDetectorState extends State<ZoomGestureDetector> {
     }
   }
 
-  final _DXY = 10;
+  final _dXY = 10;
 
   void _onTouchUpdate(Touch touch, DragUpdateDetails details) {
     assert(_touches.isNotEmpty);
@@ -80,12 +80,12 @@ class _ZoomGestureDetectorState extends State<ZoomGestureDetector> {
 
       if (widget.onHorizontalDragUpdate != null) {
         final dx = (details.localPosition.dx - touch._startOffset.dx).abs();
-        if (dx > _DXY) widget.onHorizontalDragUpdate((details.localPosition.dx - touch._startOffset.dx).clamp(-2.0, 2.0));
+        if (dx > _dXY) widget.onHorizontalDragUpdate((details.localPosition.dx - touch._startOffset.dx).clamp(-2.0, 2.0));
       }
 
       if (widget.onVerticalDragUpdate != null) {
         final dy = (details.localPosition.dy - touch._startOffset.dy).abs();
-        if (dy > _DXY) widget.onVerticalDragUpdate((details.localPosition.dy - touch._startOffset.dy).clamp(-2.0, 2.0));
+        if (dy > _dXY) widget.onVerticalDragUpdate((details.localPosition.dy - touch._startOffset.dy).clamp(-2.0, 2.0));
       }
 
     } else {
