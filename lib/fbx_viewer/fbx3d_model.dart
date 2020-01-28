@@ -1,19 +1,15 @@
 import 'dart:convert';
 import 'dart:core';
 import 'dart:typed_data';
-import 'dart:ui' as ui;
-import 'package:fbx/fbx.dart';
-import 'package:fbx/fbx/fbx_loader.dart';
-import 'package:fbx/fbx/scene/fbx_scene.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_fbx3d_viewer/fbx3d_object.dart';
+import 'package:flutter_fbx3d_viewer/fbx_parser/fbx.dart';
+import 'package:flutter_fbx3d_viewer/fbx_viewer/fbx3d_object.dart';
 
 import 'utils/logger.dart';
 
 class Fbx3DModel {
   FbxScene scene;
   List<Fbx3DObject> objects = List();
-  ui.ImageShader triangleShader;
 
   Fbx3DModel();
 
@@ -22,8 +18,13 @@ class Fbx3DModel {
 
     scene = FbxLoader().load(Uint8List.fromList(utf8.encode(cont)));
 
+    logger("---------scene.meshes ${scene.meshes.length}");
+
     for (FbxMesh mesh in scene.meshes) {
       FbxNode meshNode = mesh.getParentNode();
+
+      logger("-----------meshNode $meshNode");
+
       if (meshNode == null) {
         continue;
       }
@@ -41,6 +42,8 @@ class Fbx3DModel {
       object.setSkinning(mesh.display[0].skinWeights, mesh.display[0].skinIndices);
 
       object.transform = meshNode.evalGlobalTransform();
+
+      logger("-----objects added $object");
 
       objects.add(object);
     }

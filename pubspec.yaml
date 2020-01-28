@@ -1,14 +1,14 @@
 name: flutter_fbx3d_viewer
-description: Flutter package for viewing Fbx 3d animated files. Now it is only a non textured version.
-version: 0.0.3
+description: Flutter package for viewing Fbx 3d animated files with textures, basic lights, colors.
+version: 1.0.0
 homepage: https://github.com/klaszlo8207/Flutter-FBX-3D-Viewer
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  fbx: ^0.2.0
   vector_math: ^2.0.8
+  provider: ^4.0.2
 
   flutter:
     sdk: flutter
@@ -18,6 +18,6 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-    assets:
-    - assets/knight.fbx
+    #assets:
+    #- assets/knight.fbx
 

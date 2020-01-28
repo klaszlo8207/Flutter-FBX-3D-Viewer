@@ -1,5 +1,13 @@
-## [0.0.3] - Release
+## 1.0.0
 
-* Some changes
+* Textured version update
+
+## 0.0.2
+
+* Weights FIX
+
+## 0.0.1
+
+* First release
 
 

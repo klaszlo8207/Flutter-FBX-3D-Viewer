@@ -1,20 +1,24 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/gestures.dart';
 
+///
+/// Created by Kozári László in 2020.01.01
+/// lostinwar22@gmail.com
+///
+
 class ZoomGestureDetector extends StatefulWidget {
   final Widget child;
   final void Function(Offset initialPoint) onPanStart;
   final void Function(Offset initialPoint, Offset delta) onPanUpdate;
   final void Function() onPanEnd;
-
   final void Function(Offset initialFocusPoint) onScaleStart;
   final void Function(Offset changedFocusPoint, double scale) onScaleUpdate;
   final void Function() onScaleEnd;
-
   final void Function(double dx) onHorizontalDragUpdate;
   final void Function(double dy) onVerticalDragUpdate;
+  final int panDistanceToActivate;
 
-  ZoomGestureDetector({
+  const ZoomGestureDetector({
     this.child,
     this.onPanStart,
     this.onPanUpdate,
@@ -24,6 +28,7 @@ class ZoomGestureDetector extends StatefulWidget {
     this.onScaleEnd,
     this.onHorizontalDragUpdate,
     this.onVerticalDragUpdate,
+    this.panDistanceToActivate
   });
 
   @override
@@ -40,13 +45,13 @@ class _ZoomGestureDetectorState extends State<ZoomGestureDetector> {
       child: widget.child,
       gestures: {
         ImmediateMultiDragGestureRecognizer: GestureRecognizerFactoryWithHandlers<ImmediateMultiDragGestureRecognizer>(
-          () => ImmediateMultiDragGestureRecognizer(),
-          (ImmediateMultiDragGestureRecognizer instance) {
+              () => ImmediateMultiDragGestureRecognizer(),
+              (ImmediateMultiDragGestureRecognizer instance) {
             instance.onStart = (Offset offset) {
               final touch = Touch(
                 offset,
-                (drag, details) => _onTouchUpdate(drag, details),
-                (drag, details) => _onTouchEnd(drag, details),
+                    (drag, details) => _onTouchUpdate(drag, details),
+                    (drag, details) => _onTouchEnd(drag, details),
               );
               _onTouchStart(touch);
               return touch;
@@ -64,12 +69,8 @@ class _ZoomGestureDetectorState extends State<ZoomGestureDetector> {
     } else if (_touches.length == 2) {
       _initialScalingDistance = (_touches[0]._currentOffset - _touches[1]._currentOffset).distance;
       if (widget.onScaleStart != null) widget.onScaleStart((_touches[0]._currentOffset + _touches[1]._currentOffset) / 2);
-    } else {
-      // Do nothing/ ignore
     }
   }
-
-  final _dXY = 10;
 
   void _onTouchUpdate(Touch touch, DragUpdateDetails details) {
     assert(_touches.isNotEmpty);
@@ -80,16 +81,15 @@ class _ZoomGestureDetectorState extends State<ZoomGestureDetector> {
 
       if (widget.onHorizontalDragUpdate != null) {
         final dx = (details.localPosition.dx - touch._startOffset.dx).abs();
-        if (dx > _dXY) widget.onHorizontalDragUpdate((details.localPosition.dx - touch._startOffset.dx).clamp(-2.0, 2.0));
+        if (dx > widget.panDistanceToActivate ?? 50) widget.onHorizontalDragUpdate((details.localPosition.dx - touch._startOffset.dx).clamp(-2.0, 2.0));
       }
 
       if (widget.onVerticalDragUpdate != null) {
         final dy = (details.localPosition.dy - touch._startOffset.dy).abs();
-        if (dy > _dXY) widget.onVerticalDragUpdate((details.localPosition.dy - touch._startOffset.dy).clamp(-2.0, 2.0));
+        if (dy > widget.panDistanceToActivate ?? 50) widget.onVerticalDragUpdate((details.localPosition.dy - touch._startOffset.dy).clamp(-2.0, 2.0));
       }
 
     } else {
-      // TODO average of ALL offsets, not only 2 first
       var newDistance = (_touches[0]._currentOffset - _touches[1]._currentOffset).distance;
 
       if (widget.onScaleUpdate != null) widget.onScaleUpdate((_touches[0]._currentOffset + _touches[1]._currentOffset) / 2, newDistance / _initialScalingDistance);
@@ -103,7 +103,6 @@ class _ZoomGestureDetectorState extends State<ZoomGestureDetector> {
     } else if (_touches.length == 1) {
       if (widget.onScaleEnd != null) widget.onScaleEnd();
 
-      // Restart pan
       _touches[0]._startOffset = _touches[0]._currentOffset;
       if (widget.onPanStart != null) widget.onPanStart(_touches[0]._startOffset);
     }
