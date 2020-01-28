@@ -8,7 +8,18 @@ Support me: https://www.paypal.me/LaszloKozari
 
 This library is based on the [dart_fbx](https://github.com/brendan-duncan/dart_fbx) library
 
-![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic1.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic2.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic3.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic4.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic5.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic6.png "Pic") 
+## Pictures
+
+![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic1.jpg)
+![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic2.jpg)
+![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic3.jpg)
+![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic4.jpg)
+![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic5.jpg)
+![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic6.jpg)
+
+## Video
+
+[![Video](http://img.youtube.com/vi/hTnkwEGFu9k/0.jpg)](https://www.youtube.com/watch?v=hTnkwEGFu9k)
 
 
 ## Example
