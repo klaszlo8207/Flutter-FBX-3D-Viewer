@@ -1,6 +1,6 @@
 # Flutter FBX 3D Viewer
 
-Flutter package for viewing FBX 3D animated files
+Flutter package for viewing FBX 3D animated files with textures
 
 Support me: https://www.paypal.me/LaszloKozari
 
@@ -8,55 +8,50 @@ Support me: https://www.paypal.me/LaszloKozari
 
 This library is based on the [dart_fbx](https://github.com/brendan-duncan/dart_fbx) library
 
-![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic1.png "Pic1") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic2.png "Pic2") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/gif.gif "Gif")
+![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic1.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic2.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic3.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic4.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic5.png "Pic") ![alt text](https://raw.githubusercontent.com/klaszlo8207/Flutter-FBX-3D-Viewer/master/pix/pic6.png "Pic") 
+
 
 ## Example
-
-    Fbx3DViewer(
-      size: Size(ScreenUtils.width, ScreenUtils.height),
-      zoom: 30,
-      path: "assets/knight_2014.fbx",
-      fromAsset: true,
-      showInfo: true,
-      rotateX: false,
-      rotateY: false,
-      showWireframe: true,
-      wireframeColor: Colors.blue,
-      initialAngles: Math.Vector3(270, 10, 0),
-    );
- 
   
-[FBX Viewer](https://github.com/klaszlo8207/Flutter-FBX-3D-Viewer/blob/master/example/example_app.dart)
+[FBX Viewer Example](https://github.com/klaszlo8207/Flutter-FBX-3D-Viewer/blob/master/example/example_app.dart)
 
 ## Properties
-
-**path**: you can add an **asset path (fromAsset=true)** or you can add an **SD card path (fromAsset=false)**
-
-**zoom**: Initial zoom.
-
-**showInfo**: Show infos like FPS, and vertices.
-
-**rotateX**: Animating the object with a rotateX.
-
-**rotateY**: Animating the object with a rotateY.
-
-**showWireframe**: Show the wireframe.
-
-**wireframeColor**: Color of the wireframe.
-
-**initialAngles**: Initial model angles.
+```
+  Fbx3DViewer({
+    @required this.size,
+    @required this.fbxPath,                 // "assets/asd.fbx" or sd card path
+    @required this.lightPosition,
+    @required this.initialZoom,
+    @required this.animationSpeed,          // 0-1
+    @required this.fbx3DViewerController,
+    @required this.refreshMilliseconds,
+    @required this.endFrame,                //max frame to play
+    this.texturePath,                       // "assets/asd.png" or sd card path
+    this.backgroundColor = const Color(0xff353535),
+    this.showInfo = false,
+    this.showWireframe = false,
+    this.wireframeColor = Colors.black,
+    this.initialAngles,
+    this.panDistanceToActivate = 10,        //pan distance to activate swype
+    this.onZoomChangeListener,
+    this.onRotationChangeListener,
+    this.onHorizontalDragUpdate,
+    this.onVerticalDragUpdate,
+    this.color = Colors.white,
+    this.lightColor = Colors.white,
+    this.showWireFrame = true,
+    this.showGrids = true,
+    this.gridsColor = const Color(0xff4b4b4b),
+    this.gridsMaxTile = 10,
+    this.gridsTileSize = 1.0,
+  });
+```
 
 ## Convert an FBX binary file to an FBX ASCII file that can this library handle
 
-1, First step is to download an animated/rigged fbx binary file from the net:
+1, First step is to download an animated/rigged fbx binary file from the net.
 
-https://www.turbosquid.com/3d-models/free-female-character-rigged-biped-3d-model/569036
-
-Lets see this model. (you will download **Mixamo-Joan_InjuredWalkAnimation.fbx  Autodesk FBX  - 4.22 MB**)
-
-2, Second is to load that modell with **AUTODESK MotionBuilder 2020**
-
-You just drop you file to your MotionBuilder then FBX Open -> mixamo.com
+2, Second is to load that modell with **AUTODESK MotionBuilder 2020** or **AUTODESK 3DS Max**!
 
 3, 
 **Python Tools -> FBX Export on the MotionBuilder**
@@ -89,19 +84,19 @@ Textures (all)
 
 Video
 
+**TRIANGULATE**
+
 4, SAVE
 
 Now if everything is went good in the fbx file header you can see this: **; FBX 7.4.0 project file**
 
 ## Limits
 
-**FBX is a closed format, so while this library does it's best to interpret the data in an FBX file, I cannot guarantee that it will read all FBX files, or all data within FBX files.**
-
-**No texture**
+**FBX is a closed format, so while this library does it's best to interpret the data in an FBX file, I cannot guarantee that it will read all FBX files, or all data within FBX files. You can play with FBX version 7.4 files ASCII text format**
 
 **Please don't use this library with a lot of vertices/polygons. Speed will be very low on huge point count.**
 
-Normal speed will be on an fbx that is **max 3000 vertices**. (**Becuse it is draw with the CPU not on the GPU**)
+Normal speed will be on an fbx that is **max 3000-5000 vertices**
 
 ## Author
 
