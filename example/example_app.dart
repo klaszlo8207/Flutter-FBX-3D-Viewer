@@ -17,7 +17,7 @@ class _ExampleState extends State<Example> {
     return Fbx3DViewer(
       size: Size(ScreenUtils.width, ScreenUtils.height),
       zoom: 30,
-      path: "assets/knight_2014.fbx",
+      path: "assets/knight.fbx",
       fromAsset: true,
       showInfo: true,
       rotateX: false,

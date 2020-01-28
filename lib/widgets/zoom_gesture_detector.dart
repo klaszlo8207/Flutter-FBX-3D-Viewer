@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/gestures.dart';
 
-class ScalingGestureDetector extends StatefulWidget {
+class ZoomGestureDetector extends StatefulWidget {
   final Widget child;
   final void Function(Offset initialPoint) onPanStart;
   final void Function(Offset initialPoint, Offset delta) onPanUpdate;
@@ -14,7 +14,7 @@ class ScalingGestureDetector extends StatefulWidget {
   final void Function(double dx) onHorizontalDragUpdate;
   final void Function(double dy) onVerticalDragUpdate;
 
-  ScalingGestureDetector({
+  ZoomGestureDetector({
     this.child,
     this.onPanStart,
     this.onPanUpdate,
@@ -27,10 +27,10 @@ class ScalingGestureDetector extends StatefulWidget {
   });
 
   @override
-  _ScalingGestureDetectorState createState() => _ScalingGestureDetectorState();
+  _ZoomGestureDetectorState createState() => _ZoomGestureDetectorState();
 }
 
-class _ScalingGestureDetectorState extends State<ScalingGestureDetector> {
+class _ZoomGestureDetectorState extends State<ZoomGestureDetector> {
   final List<Touch> _touches = [];
   double _initialScalingDistance;
 

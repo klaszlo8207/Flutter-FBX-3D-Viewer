@@ -2,10 +2,11 @@ library flutter_fbx3d_viewer;
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_fbx3d_viewer/widgets/scaling_gesture_detector.dart';
+import 'package:flutter_fbx3d_viewer/widgets/zoom_gesture_detector.dart';
 import 'package:flutter_fbx3d_viewer/fbx3d_model.dart';
 import 'package:flutter_fbx3d_viewer/fbx3d_object.dart';
 import 'package:flutter_fbx3d_viewer/utils/math_utils.dart';
@@ -174,7 +175,7 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
   Widget build(BuildContext context) {
     Future.delayed(Duration(milliseconds: 10), () => setState(() {}));
 
-    return ScalingGestureDetector(
+    return ZoomGestureDetector(
       child: CustomPaint(
         painter: _Fbx3DRenderer(widget, _fbxModel, _angleX, _angleY, _angleZ),
         size: widget.size,
@@ -293,6 +294,8 @@ class _Fbx3DRenderer extends CustomPainter {
       final n = Math.Vector3(n1, n2, n3);
       tempNormals.add(n);
     }
+
+    _getMaxWeightsPerVertex(tempVertices, oSkinWeights);
 
     List<Math.Vector3> tempVertices2 = List();
     List<Math.Vector3> tempNormals2 = List();
@@ -456,6 +459,38 @@ class _Fbx3DRenderer extends CustomPainter {
 
   @override
   bool shouldRepaint(_Fbx3DRenderer old) => true;
+}
+
+//from jMonkeyEngine, normalize the weights
+_getMaxWeightsPerVertex(List<Math.Vector3> tempVertices, List<Math.Vector4> oSkinWeights) {
+  int maxWeightsPerVertex = 0;
+
+  for (int index = 0; index < tempVertices.length; index++) {
+    final w0 = oSkinWeights[index].x;
+    final w1 = oSkinWeights[index].y;
+    final w2 = oSkinWeights[index].z;
+    final w3 = oSkinWeights[index].w;
+
+    if (w3 != 0) {
+      maxWeightsPerVertex = max(maxWeightsPerVertex, 4);
+    } else if (w2 != 0) {
+      maxWeightsPerVertex = max(maxWeightsPerVertex, 3);
+    } else if (w1 != 0) {
+      maxWeightsPerVertex = max(maxWeightsPerVertex, 2);
+    } else if (w0 != 0) {
+      maxWeightsPerVertex = max(maxWeightsPerVertex, 1);
+    }
+
+    double sum = w0 + w1 + w2 + w3;
+    if (sum != 1.0) {
+      double normalized = (sum != 0) ? (1.0 / sum) : 0.0;
+      oSkinWeights[index].x = (w0 * normalized);
+      oSkinWeights[index].y = (w1 * normalized);
+      oSkinWeights[index].z = (w2 * normalized);
+      oSkinWeights[index].w = (w3 * normalized);
+    }
+  }
+  return maxWeightsPerVertex;
 }
 
 class _Fbx3DBones {

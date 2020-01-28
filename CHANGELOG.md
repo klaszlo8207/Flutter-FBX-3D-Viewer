@@ -1,5 +1,5 @@
-## [0.0.1] - Release
+## [0.0.2] - Release
 
-* Flutter package for viewing FBX 3D animated files
+* Fixed weights
 
 
