@@ -2,8 +2,6 @@
 
 Flutter package for viewing FBX 3D animated files with textures
 
-Support me: https://www.paypal.me/LaszloKozari
-
 **This library is experimental. Some FBX files, particularly older fbx files, may not load correctly. No guarantee is provided as FBX is a closed proprietary format.**
 
 This library is based on the [dart_fbx](https://github.com/brendan-duncan/dart_fbx) library
