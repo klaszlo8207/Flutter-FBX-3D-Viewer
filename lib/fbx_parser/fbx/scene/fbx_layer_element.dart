@@ -5,12 +5,12 @@ import 'fbx_reference_mode.dart';
 class FbxLayerElement<T> {
   FbxMappingMode mappingMode = FbxMappingMode.None;
   FbxReferenceMode referenceMode = FbxReferenceMode.Direct;
-  List<int> indexArray;
-  List<T> data;
+  List<int>? indexArray;
+  List<T>? data;
 
-  int get length => data.length;
+  int get length => data!.length;
 
-  T operator[](int index) => data[index];
+  T operator[](int index) => data![index];
 
-  operator[]=(int index, T v) => data[index] = v;
+  operator[]=(int index, T v) => data![index] = v;
 }

@@ -7,46 +7,46 @@ import 'fbx_scene.dart';
 import 'package:vector_math/vector_math.dart';
 
 class FbxGlobalSettings extends FbxObject {
-  FbxProperty upAxis;
-  FbxProperty upAxisSign;
-  FbxProperty frontAxis;
-  FbxProperty frontAxisSign;
-  FbxProperty coordAxis;
-  FbxProperty coordAxisSign;
-  FbxProperty originalUpAxis;
-  FbxProperty originalUpAxisSign;
-  FbxProperty unitScaleFactor;
-  FbxProperty originalUnitScaleFactor;
-  FbxProperty ambientColor;
-  FbxProperty defaultCamera;
-  FbxProperty timeMode;
-  FbxProperty timeProtocol;
-  FbxProperty snapOnFrameMode;
-  FbxProperty timeSpanStart;
-  FbxProperty timeSpanStop;
-  FbxProperty customFrameRate;
+  late FbxProperty upAxis;
+  late FbxProperty upAxisSign;
+  late FbxProperty frontAxis;
+  late FbxProperty frontAxisSign;
+  late FbxProperty coordAxis;
+  late FbxProperty coordAxisSign;
+  late FbxProperty originalUpAxis;
+  late FbxProperty originalUpAxisSign;
+  late FbxProperty unitScaleFactor;
+  late FbxProperty originalUnitScaleFactor;
+  late FbxProperty ambientColor;
+  late FbxProperty defaultCamera;
+  late FbxProperty timeMode;
+  late FbxProperty timeProtocol;
+  late FbxProperty snapOnFrameMode;
+  late FbxProperty timeSpanStart;
+  late FbxProperty timeSpanStop;
+  late FbxProperty customFrameRate;
 
   FbxGlobalSettings(FbxElement element, FbxScene scene)
     : super(0, '', 'GlobalSettings', element, scene) {
 
-    upAxis = addProperty('UpAxis', 1);
-    upAxisSign = addProperty('UpAxisSign', 1);
-    frontAxis = addProperty('FrontAxis', 2);
-    frontAxisSign = addProperty('FrontAxisSign', 1);
-    coordAxis = addProperty('CoordAxis', 0);
-    coordAxisSign = addProperty('CoordAxisSign', 1);
-    originalUpAxis = addProperty('OriginalUpAxis', 0);
-    originalUpAxisSign = addProperty('OriginalUpAxisSign', 1);
-    unitScaleFactor = addProperty('UnitScaleFactor', 1.0);
-    originalUnitScaleFactor = addProperty('OriginalUnitScaleFactor', 1.0);
-    ambientColor = addProperty('AmbientColor', Vector3(0.0, 0.0, 0.0));
-    defaultCamera = addProperty('DefaultCamera', '');
-    timeMode = addProperty('TimeMode', FbxFrameRate.DEFAULT);
-    timeProtocol = addProperty('TimeProtocol', 0);
-    snapOnFrameMode = addProperty('SnapOnFrameMode', 0);
-    timeSpanStart = addProperty('TimeSpanStart', 0);
-    timeSpanStop = addProperty('TimeSpanEnd', 0);
-    customFrameRate = addProperty('CustomFrameRate', -1.0);
+    upAxis = addProperty('UpAxis', 1)!;
+    upAxisSign = addProperty('UpAxisSign', 1)!;
+    frontAxis = addProperty('FrontAxis', 2)!;
+    frontAxisSign = addProperty('FrontAxisSign', 1)!;
+    coordAxis = addProperty('CoordAxis', 0)!;
+    coordAxisSign = addProperty('CoordAxisSign', 1)!;
+    originalUpAxis = addProperty('OriginalUpAxis', 0)!;
+    originalUpAxisSign = addProperty('OriginalUpAxisSign', 1)!;
+    unitScaleFactor = addProperty('UnitScaleFactor', 1.0)!;
+    originalUnitScaleFactor = addProperty('OriginalUnitScaleFactor', 1.0)!;
+    ambientColor = addProperty('AmbientColor', Vector3(0.0, 0.0, 0.0))!;
+    defaultCamera = addProperty('DefaultCamera', '')!;
+    timeMode = addProperty('TimeMode', FbxFrameRate.DEFAULT)!;
+    timeProtocol = addProperty('TimeProtocol', 0)!;
+    snapOnFrameMode = addProperty('SnapOnFrameMode', 0)!;
+    timeSpanStart = addProperty('TimeSpanStart', 0)!;
+    timeSpanStop = addProperty('TimeSpanEnd', 0)!;
+    customFrameRate = addProperty('CustomFrameRate', -1.0)!;
 
     for (final c in element.children) {
       if (c.id == 'Properties60' || c.id == 'Properties70') {

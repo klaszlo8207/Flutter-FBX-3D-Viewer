@@ -17,8 +17,8 @@ class FbxPose extends FbxObject {
       if (c.id == 'Type') {
         poseType = c.getString(0);
       } else if (c.id == 'PoseNode') {
-        Matrix4 matrix;
-        String nodeName;
+        Matrix4? matrix;
+        String? nodeName;
 
         for (final c2 in c.children) {
           if (c2.id == 'Node') {
@@ -38,10 +38,10 @@ class FbxPose extends FbxObject {
           }
         }
 
-        if (matrix != null && nodeName != null) {
+        if (nodeName != null) {
           final node = scene.allObjects[nodeName] as FbxNode;
           if (node != null) {
-            data[node] = matrix;
+            data[node] = matrix!;
           } else {
             print('Could not find pose node: $nodeName');
           }
@@ -52,7 +52,7 @@ class FbxPose extends FbxObject {
     }
   }
 
-  Matrix4 getMatrix(FbxNode node) {
+  Matrix4? getMatrix(FbxNode node) {
     if (!data.containsKey(node)) {
       return null;
     }

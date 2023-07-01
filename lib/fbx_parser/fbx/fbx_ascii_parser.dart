@@ -7,7 +7,7 @@ import 'input_buffer.dart';
 class FbxAsciiParser extends FbxParser {
   static const FILE_HEADER = '; FBX';
 
-  InputBuffer _input;
+  late InputBuffer _input;
 
   static bool isValidFile(InputBuffer input) {
     final fp = input.offset;
@@ -36,19 +36,19 @@ class FbxAsciiParser extends FbxParser {
   @override
   FbxElement nextElement() {
     if (_input == null) {
-      return null;
+      return FbxElement("");
     }
 
     var tk = _nextToken(_input);
     if (tk == '}') {
-      return null;
+      return FbxElement("");
     }
 
     if (_nextToken(_input) != ':') {
-      return null;
+      return FbxElement("");
     }
 
-    final elem = FbxElement(tk);
+    final elem = FbxElement(tk!);
 
     final sp = _input.offset;
     tk = _nextToken(_input);
@@ -94,7 +94,7 @@ class FbxAsciiParser extends FbxParser {
   @override
   String getName(String rawName) => rawName.split('::').last;
 
-  String _nextToken(InputBuffer input, {bool peek = false}) {
+  String? _nextToken(InputBuffer input, {bool peek = false}) {
     _skipWhitespace(input);
 
     if (input.isEOS) {

@@ -135,9 +135,9 @@ class ChangeVariants with ChangeNotifier {
 }
 
 class _ExampleState extends State<Example> {
-  Fbx3DViewerController _fbx3DAnimationController;
-  Timer _renderTimer;
-  ChangeVariants _changeVariantsSet;
+  late Fbx3DViewerController _fbx3DAnimationController;
+  late Timer _renderTimer;
+  late ChangeVariants _changeVariantsSet;
 
   _ExampleState() {
     _fbx3DAnimationController = Fbx3DViewerController();
@@ -229,8 +229,7 @@ class _ExampleState extends State<Example> {
                   panDistanceToActivate: 50,
                   gridsTileSize: object.gridTileSize,
                 ),
-                FlatButton(
-                  color: Colors.white,
+                TextButton(
                   child: Text("Change model"),
                   onPressed: () => _nextObj(),
                 ),
@@ -244,7 +243,7 @@ class _ExampleState extends State<Example> {
                             title: Text("Wireframe"),
                             value: changeVariantsGet._showWireframe,
                             onChanged: (v) {
-                              _changeVariantsSet.showWireframe = v;
+                              _changeVariantsSet.showWireframe = v!;
                               _fbx3DAnimationController.showWireframe(_changeVariantsSet.showWireframe);
                             },
                             controlAffinity: ListTileControlAffinity.leading,
@@ -253,7 +252,7 @@ class _ExampleState extends State<Example> {
                             title: Text("Rnd colors"),
                             value: changeVariantsGet._rndColor,
                             onChanged: (v) {
-                              _changeVariantsSet.rndColor = v;
+                              _changeVariantsSet.rndColor = v!;
                               _fbx3DAnimationController.setRandomColors(randomColor(opacity: 0.7), randomColor(opacity: 0.3));
                             },
                             controlAffinity: ListTileControlAffinity.leading,

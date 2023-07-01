@@ -12,13 +12,13 @@ class FbxSkinDeformer extends FbxDeformer {
   static const int DUAL_QUATERNION = 2;
   static const int BLEND = 3;
 
-  FbxProperty linkDeformAcuracy;
-  FbxProperty skinningType;
+  late FbxProperty linkDeformAcuracy;
+  late FbxProperty skinningType;
 
   FbxSkinDeformer(int id, String name, FbxElement element, FbxScene scene)
     : super(id, name, 'Skin', element, scene) {
-    linkDeformAcuracy = addProperty('Link_DeformAcuracy', 50);
-    skinningType = addProperty('SkinningType', RIGID);
+    linkDeformAcuracy = addProperty('Link_DeformAcuracy', 50)!;
+    skinningType = addProperty('SkinningType', RIGID)!;
 
     for (final c in element.children) {
       if (c.id == 'Link_DeformAcuracy') {

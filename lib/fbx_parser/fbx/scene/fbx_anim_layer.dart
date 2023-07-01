@@ -16,25 +16,25 @@ class FbxAnimLayer extends FbxObject {
   static const int SCALE_MULTIPLY = 0;
   static const int SCALE_ADDITIVE = 1;
 
-  FbxProperty weight;
-  FbxProperty mute;
-  FbxProperty solo;
-  FbxProperty lock;
-  FbxProperty color;
-  FbxProperty blendMode;
-  FbxProperty rotationAccumulationMode;
-  FbxProperty scaleAccumulationMode;
+  late FbxProperty weight;
+  late FbxProperty mute;
+  late FbxProperty solo;
+  late FbxProperty lock;
+  late FbxProperty color;
+  late FbxProperty blendMode;
+  late FbxProperty rotationAccumulationMode;
+  late FbxProperty scaleAccumulationMode;
 
   FbxAnimLayer(int id, String name, FbxElement element, FbxScene scene)
     : super(id, name, 'AnimLayer', element, scene) {
-    weight = addProperty('Weight', 100.0);
-    mute = addProperty('Mute', false);
-    solo = addProperty('Solo', false);
-    lock = addProperty('Lock', false);
-    color = addProperty('Color', Vector3(0.8, 0.8, 0.8));
-    blendMode = addProperty('BlendMode', BLEND_ADDITIVE);
-    rotationAccumulationMode = addProperty('RotationAccumulationMode', ROTATION_BY_LAYER);
-    scaleAccumulationMode = addProperty('ScaleAccumulationMode', SCALE_MULTIPLY);
+    weight = addProperty('Weight', 100.0)!;
+    mute = addProperty('Mute', false)!;
+    solo = addProperty('Solo', false)!;
+    lock = addProperty('Lock', false)!;
+    color = addProperty('Color', Vector3(0.8, 0.8, 0.8))!;
+    blendMode = addProperty('BlendMode', BLEND_ADDITIVE)!;
+    rotationAccumulationMode = addProperty('RotationAccumulationMode', ROTATION_BY_LAYER)!;
+    scaleAccumulationMode = addProperty('ScaleAccumulationMode', SCALE_MULTIPLY)!;
 
     for (final c in element.children) {
       if (c.id == 'Weight') {

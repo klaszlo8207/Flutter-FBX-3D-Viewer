@@ -6,25 +6,25 @@ import 'fbx_scene.dart';
 import 'package:vector_math/vector_math.dart';
 
 class FbxCamera extends FbxNodeAttribute {
-  FbxProperty position;
-  FbxProperty lookAt;
-  FbxProperty cameraOrthoZoom;
-  FbxProperty roll;
-  FbxProperty fieldOfView;
-  FbxProperty frameColor;
-  FbxProperty nearPlane;
-  FbxProperty farPlane;
+  late FbxProperty position;
+  late  FbxProperty lookAt;
+  late FbxProperty cameraOrthoZoom;
+  late  FbxProperty roll;
+  late FbxProperty fieldOfView;
+  late FbxProperty frameColor;
+  late FbxProperty nearPlane;
+  late FbxProperty farPlane;
 
   FbxCamera(int id, String name, FbxElement element, FbxScene scene)
     : super(id, name, 'Camera', element, scene) {
-    position = addProperty('Position', Vector3(0.0, 0.0, 0.0));
-    lookAt = addProperty('LookAt', Vector3(0.0, 0.0, 0.0));
-    cameraOrthoZoom = addProperty('CameraOrthoZoom', 1.0);
-    roll = addProperty('Roll', 0.0);
-    fieldOfView = addProperty('FieldOfView', 40.0);
-    frameColor = addProperty('FrameColor', Vector3(0.0, 0.0, 0.0));
-    nearPlane = addProperty('NearPlane', 1.0);
-    farPlane = addProperty('FarPlane', 10000.0);
+    position = addProperty('Position', Vector3(0.0, 0.0, 0.0))!;
+    lookAt = addProperty('LookAt', Vector3(0.0, 0.0, 0.0))!;
+    cameraOrthoZoom = addProperty('CameraOrthoZoom', 1.0)!;
+    roll = addProperty('Roll', 0.0)!;
+    fieldOfView = addProperty('FieldOfView', 40.0)!;
+    frameColor = addProperty('FrameColor', Vector3(0.0, 0.0, 0.0))!;
+    nearPlane = addProperty('NearPlane', 1.0)!;
+    farPlane = addProperty('FarPlane', 10000.0)!;
 
     for (final c in element.children) {
       if (c.id == 'CameraOrthoZoom') {

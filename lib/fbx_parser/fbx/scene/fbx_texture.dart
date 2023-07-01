@@ -4,7 +4,7 @@ import 'fbx_node.dart';
 import 'fbx_scene.dart';
 
 class FbxTexture extends FbxNode {
-  String filename;
+  late String filename;
 
   FbxTexture(int id, String name, FbxElement element, FbxScene scene)
     : super(id, name, 'Texture', element, scene) {
