@@ -1,8 +1,9 @@
 import 'dart:typed_data';
+
 import 'package:vector_math/vector_math.dart';
 
 Float32List scalarValues(Float32List list, double v) {
-  List<double> out = List<double>();
+  List<double> out = [];
   for (int index = 0; index < list.length; index++) {
     out.add(list[index] * v);
   }
@@ -10,7 +11,7 @@ Float32List scalarValues(Float32List list, double v) {
 }
 
 List<Vector2> listVector2FromFloat32List(Float32List list) {
-  List<Vector2> vectors = List();
+  List<Vector2> vectors = [];
   for (int index = 0; index < list.length; index += 2) {
     var v = Vector2(
       list[index],
@@ -22,7 +23,7 @@ List<Vector2> listVector2FromFloat32List(Float32List list) {
 }
 
 List<Vector3> listVector3FromUint16List(Uint16List list) {
-  List<Vector3> vectors = List();
+  List<Vector3> vectors = [];
   for (int index = 0; index < list.length; index += 3) {
     var v = Vector3(
       list[index].toDouble(),
@@ -35,7 +36,7 @@ List<Vector3> listVector3FromUint16List(Uint16List list) {
 }
 
 List<Vector3> listVector3FromFloat32List(Float32List list) {
-  List<Vector3> vectors = List();
+  List<Vector3> vectors = [];
   for (int index = 0; index < list.length; index += 3) {
     var v = Vector3(
       list[index],
@@ -48,7 +49,7 @@ List<Vector3> listVector3FromFloat32List(Float32List list) {
 }
 
 List<Vector4> listVector4FromFloat32List(Float32List list) {
-  List<Vector4> vectors = List();
+  List<Vector4> vectors = [];
   for (int index = 0; index < list.length; index += 4) {
     var v = Vector4(
       list[index],
@@ -62,7 +63,7 @@ List<Vector4> listVector4FromFloat32List(Float32List list) {
 }
 
 List<Matrix4> listMatrixFromFloat32List(Float32List skinPalette) {
-  List<Matrix4> matrices = List();
+  List<Matrix4> matrices = [];
   for (int index = 0; index < skinPalette.length; index += 16) {
     var m = Matrix4(
       skinPalette[index],

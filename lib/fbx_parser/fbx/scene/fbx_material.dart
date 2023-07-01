@@ -6,38 +6,38 @@ import 'fbx_scene.dart';
 import 'package:vector_math/vector_math.dart';
 
 class FbxMaterial extends FbxObject {
-  FbxProperty shadingModel;
+  late FbxProperty shadingModel;
   // lambert
-  FbxProperty ambientColor;
-  FbxProperty diffuseColor;
-  FbxProperty transparencyFactor;
-  FbxProperty emissive;
-  FbxProperty ambient;
-  FbxProperty diffuse;
-  FbxProperty opacity;
+  late FbxProperty ambientColor;
+  late FbxProperty diffuseColor;
+  late FbxProperty transparencyFactor;
+  late FbxProperty emissive;
+  late FbxProperty ambient;
+  late FbxProperty diffuse;
+  late FbxProperty opacity;
   // phong
-  FbxProperty specular;
-  FbxProperty specularFactor;
-  FbxProperty shininess;
-  FbxProperty reflection;
-  FbxProperty reflectionFactor;
+  late FbxProperty specular;
+  late FbxProperty specularFactor;
+  late FbxProperty shininess;
+  late FbxProperty reflection;
+  late FbxProperty reflectionFactor;
 
   FbxMaterial(int id, String name, FbxElement element, FbxScene scene)
     : super(id, name, 'Material', element, scene) {
 
-    shadingModel = addProperty('ShadingModel', 'lambert');
-    ambientColor = addProperty('AmbientColor', Vector3(0.0, 0.0, 0.0));
-    diffuseColor = addProperty('DiffuseColor', Vector3(1.0, 1.0, 1.0));
-    transparencyFactor = addProperty('TransparencyFactor', 1.0);
-    emissive = addProperty('Emissive', Vector3(0.0, 0.0, 0.0));
-    ambient = addProperty('Ambient', Vector3(0.0, 0.0, 0.0));
-    diffuse = addProperty('Diffuse', Vector3(1.0, 1.0, 1.0));
-    opacity = addProperty('Opacity', 1.0);
-    specular = addProperty('Specular', Vector3(1.0, 1.0, 1.0));
-    specularFactor = addProperty('SpecularFactor', 0.0);
-    shininess = addProperty('Shininess', 1.0);
-    reflection = addProperty('Reflection', Vector3(1.0, 1.0, 1.0));
-    reflectionFactor = addProperty('ReflectionFactor', 0.0);
+    shadingModel = addProperty('ShadingModel', 'lambert')!;
+    ambientColor = addProperty('AmbientColor', Vector3(0.0, 0.0, 0.0))!;
+    diffuseColor = addProperty('DiffuseColor', Vector3(1.0, 1.0, 1.0))!;
+    transparencyFactor = addProperty('TransparencyFactor', 1.0)!;
+    emissive = addProperty('Emissive', Vector3(0.0, 0.0, 0.0))!;
+    ambient = addProperty('Ambient', Vector3(0.0, 0.0, 0.0))!;
+    diffuse = addProperty('Diffuse', Vector3(1.0, 1.0, 1.0))!;
+    opacity = addProperty('Opacity', 1.0)!;
+    specular = addProperty('Specular', Vector3(1.0, 1.0, 1.0))!;
+    specularFactor = addProperty('SpecularFactor', 0.0)!;
+    shininess = addProperty('Shininess', 1.0)!;
+    reflection = addProperty('Reflection', Vector3(1.0, 1.0, 1.0))!;
+    reflectionFactor = addProperty('ReflectionFactor', 0.0)!;
 
     for (final c in element.children) {
       if (c.id == 'ShadingModel') {

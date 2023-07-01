@@ -1,4 +1,4 @@
-library flutter_fbx3d_viewer;
+library flutter_fbx3d_viewer_v2;
 
 import 'dart:async';
 import 'dart:io';
@@ -6,17 +6,11 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/fbx3d_model.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/fbx3d_object.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/painter/globals.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/painter/texture_data.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/painter/vertices_painter.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/converter.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/logger.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/math_utils.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/screen_utils.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/utils.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/widgets/zoom_gesture_detector.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/painter/globals.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/painter/texture_data.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/painter/vertices_painter.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/utils/converter.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/utils/utils.dart';
 import 'package:vector_math/vector_math.dart' as Math;
 
 import 'fbx3d_viewer.dart';
@@ -31,19 +25,19 @@ class Fbx3DViewer extends StatefulWidget {
   final bool showInfo;
   bool showWireframe;
   final Color wireframeColor;
-  Math.Vector3 initialAngles;
+  Math.Vector3? initialAngles;
   double initialZoom;
   final double animationSpeed;
   final Fbx3DViewerController fbx3DViewerController;
   int panDistanceToActivate = 10;
-  final Function(double) onZoomChangeListener;
-  final Function(Math.Vector3) onRotationChangeListener;
-  final void Function(double dx) onHorizontalDragUpdate;
-  final void Function(double dy) onVerticalDragUpdate;
+  final Function(double)? onZoomChangeListener;
+  final Function(Math.Vector3)? onRotationChangeListener;
+  final void Function(double dx)? onHorizontalDragUpdate;
+  final void Function(double dy)? onVerticalDragUpdate;
   final int refreshMilliseconds;
   final int endFrame;
   Color color;
-  final String texturePath;
+  final String? texturePath;
   Math.Vector3 lightPosition;
   Color lightColor;
   final bool showWireFrame;
@@ -56,14 +50,14 @@ class Fbx3DViewer extends StatefulWidget {
   currentState() => fbx3DViewerController.state;
 
   Fbx3DViewer({
-    @required this.size,
-    @required this.fbxPath,
-    @required this.lightPosition,
-    @required this.initialZoom,
-    @required this.animationSpeed,
-    @required this.fbx3DViewerController,
-    @required this.refreshMilliseconds,
-    @required this.endFrame,
+    required this.size,
+    required this.fbxPath,
+    required this.lightPosition,
+    required this.initialZoom,
+    required this.animationSpeed,
+    required this.fbx3DViewerController,
+    required this.refreshMilliseconds,
+    required this.endFrame,
     this.texturePath,
     this.backgroundColor = const Color(0xff353535),
     this.showInfo = false,
@@ -102,7 +96,7 @@ class Fbx3DViewerController extends StatefulWidget {
   reset() => state.reset();
 
   refresh() {
-    if (state.fbx3DRenderer != null) state.fbx3DRenderer.refresh();
+    if (state.fbx3DRenderer != null) state.fbx3DRenderer!.refresh();
   }
 
   @override
@@ -125,16 +119,16 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
   double angleX = 0.0;
   double angleY = 0.0;
   double angleZ = 0.0;
-  double previousZoom;
-  Offset startingFocalPoint;
-  Offset previousOffset;
+  double? previousZoom;
+  Offset? startingFocalPoint;
+  Offset? previousOffset;
   Offset offset = Offset.zero;
-  Fbx3DModel model;
+  Fbx3DModel? model;
   bool isLoading = false;
-  TextureData textureData;
+  TextureData? textureData;
   var rotation = Math.Vector3(0, 0, 0);
-  double zoom;
-  Fbx3DRenderer fbx3DRenderer;
+  double? zoom;
+  Fbx3DRenderer? fbx3DRenderer;
 
   initState() {
     super.initState();
@@ -170,7 +164,7 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
 
     if (widget.texturePath != null) {
       textureData = TextureData();
-      await textureData.load(context, widget.texturePath, resizeWidth: 200);
+      await textureData!.load(context, widget.texturePath!, resizeWidth: 200);
     }
     logger("load ${widget.texturePath}");
 
@@ -181,10 +175,10 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
 
   _newModel(String contFbx) {
     model = Fbx3DModel();
-    model.parseFrom(context, contFbx);
+    model!.parseFrom(context, contFbx);
 
     if (widget.initialAngles != null) {
-      setRotation(widget.initialAngles);
+      setRotation(widget.initialAngles!);
     }
   }
 
@@ -193,7 +187,7 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
     angleY = r.y;
     angleZ = r.z;
     _rotationChanged();
-    if (fbx3DRenderer != null) fbx3DRenderer.refresh();
+    if (fbx3DRenderer != null) fbx3DRenderer!.refresh();
   }
 
   @override
@@ -207,7 +201,7 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
       angleX = angleX - 360;
     else if (angleX < 0) angleX = 360 - angleX;
     _rotationChanged();
-    if (fbx3DRenderer != null) fbx3DRenderer.refresh();
+    if (fbx3DRenderer != null) fbx3DRenderer!.refresh();
   }
 
   rotateY(double v) {
@@ -216,7 +210,7 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
       angleY = angleY - 360;
     else if (angleY < 0) angleY = 360 - angleY;
     _rotationChanged();
-    if (fbx3DRenderer != null) fbx3DRenderer.refresh();
+    if (fbx3DRenderer != null) fbx3DRenderer!.refresh();
   }
 
   rotateZ(double v) {
@@ -225,27 +219,27 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
       angleZ = angleZ - 360;
     else if (angleZ < 0) angleZ = 360 - angleZ;
     _rotationChanged();
-    if (fbx3DRenderer != null) fbx3DRenderer.refresh();
+    if (fbx3DRenderer != null) fbx3DRenderer!.refresh();
   }
 
   _rotationChanged() {
     rotation.setValues(angleX, angleY, angleZ);
-    if (widget.onRotationChangeListener != null) widget.onRotationChangeListener(rotation);
+    if (widget.onRotationChangeListener != null) widget.onRotationChangeListener!(rotation);
   }
 
   _handleScaleStart(initialFocusPoint) {
     startingFocalPoint = initialFocusPoint;
     previousOffset = offset;
     previousZoom = zoom;
-    if (fbx3DRenderer != null) fbx3DRenderer.refresh();
+    if (fbx3DRenderer != null) fbx3DRenderer!.refresh();
   }
 
   _handleScaleUpdate(changedFocusPoint, scale) {
-    zoom = previousZoom * scale;
-    final Offset normalizedOffset = (startingFocalPoint - previousOffset) / previousZoom;
-    offset = changedFocusPoint - normalizedOffset * zoom;
-    if (widget.onZoomChangeListener != null) widget.onZoomChangeListener(zoom);
-    if (fbx3DRenderer != null) fbx3DRenderer.refresh();
+    zoom = previousZoom! * scale;
+    final Offset normalizedOffset = (startingFocalPoint! - previousOffset!) / previousZoom!;
+    offset = changedFocusPoint - normalizedOffset * zoom!;
+    if (widget.onZoomChangeListener != null) widget.onZoomChangeListener!(zoom!);
+    if (fbx3DRenderer != null) fbx3DRenderer!.refresh();
   }
 
   @override
@@ -255,7 +249,7 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
     } else {
       if (fbx3DRenderer == null) {
         fbx3DRenderer = Fbx3DRenderer(widget);
-        fbx3DRenderer.refresh();
+        fbx3DRenderer!.refresh();
       }
 
       return ZoomGestureDetector(
@@ -265,8 +259,8 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
         ),
         onScaleStart: (initialFocusPoint) => _handleScaleStart(initialFocusPoint),
         onScaleUpdate: (changedFocusPoint, scale) => _handleScaleUpdate(changedFocusPoint, scale),
-        onHorizontalDragUpdate: (double dx) => widget.onHorizontalDragUpdate(dx),
-        onVerticalDragUpdate: (double dy) => widget.onVerticalDragUpdate(dy),
+        onHorizontalDragUpdate: (double dx) => widget.onHorizontalDragUpdate!(dx),
+        onVerticalDragUpdate: (double dy) => widget.onVerticalDragUpdate!(dy),
         panDistanceToActivate: widget.panDistanceToActivate,
       );
     }
@@ -274,16 +268,16 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
 
   setLightPosition(Math.Vector3 lightPosition) {
     widget.lightPosition = lightPosition;
-    if (fbx3DRenderer != null) fbx3DRenderer.refresh();
+    if (fbx3DRenderer != null) fbx3DRenderer!.refresh();
   }
 
   showWireframe(bool showWireframe) {
     widget.showWireframe = showWireframe;
 
     if (fbx3DRenderer != null) {
-      fbx3DRenderer.reset();
+      fbx3DRenderer!.reset();
       Future.delayed(Duration(milliseconds: 100), () {
-        fbx3DRenderer.refresh();
+        fbx3DRenderer!.refresh();
       });
     }
   }
@@ -293,8 +287,8 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
     widget.lightColor = lightColor;
 
     if (fbx3DRenderer != null) {
-      fbx3DRenderer.reset();
-      Future.delayed(Duration(milliseconds: 100), () => fbx3DRenderer.refresh());
+      fbx3DRenderer!.reset();
+      Future.delayed(Duration(milliseconds: 100), () => fbx3DRenderer!.refresh());
     }
   }
 
@@ -302,8 +296,8 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
     widget.color = color;
 
     if (fbx3DRenderer != null) {
-      fbx3DRenderer.reset();
-      Future.delayed(Duration(milliseconds: 100), () => fbx3DRenderer.refresh());
+      fbx3DRenderer!.reset();
+      Future.delayed(Duration(milliseconds: 100), () => fbx3DRenderer!.refresh());
     }
   }
 
@@ -311,8 +305,8 @@ class _Fbx3DViewerState extends State<Fbx3DViewer> {
     widget.lightColor = color;
 
     if (fbx3DRenderer != null) {
-      fbx3DRenderer.reset();
-      Future.delayed(Duration(milliseconds: 100), () => fbx3DRenderer.refresh());
+      fbx3DRenderer!.reset();
+      Future.delayed(Duration(milliseconds: 100), () => fbx3DRenderer!.refresh());
     }
   }
 }
@@ -483,16 +477,16 @@ class Fbx3DRenderer extends ChangeNotifier implements CustomPainter {
       final oIndices = obj.indices;
       final oNormals = obj.normals;
       final oUVs = obj.uvs;
-      final sortedItems = List<Map<String, dynamic>>();
+      final sortedItems = <Map<String, dynamic>>[];
 
       final oJointMatrix = listMatrixFromFloat32List(obj.skinPalette);
       final oSkinIndices = listVector4FromFloat32List(obj.skinIndices);
       final oSkinWeights = listVector4FromFloat32List(obj.skinWeights);
 
       //1 a pontokbol keszitek egy Vec3 listet
-      final List<Math.Vector3> tempVertices = List();
-      final List<Math.Vector3> tempNormals = List();
-      final List<Math.Vector3> tempUVs = List();
+      final List<Math.Vector3> tempVertices = [];
+      final List<Math.Vector3> tempNormals = [];
+      final List<Math.Vector3> tempUVs = [];
 
       for (int index = 0; index < oPoints.length; index += 3) {
         final p1 = oPoints[index];
@@ -517,8 +511,8 @@ class Fbx3DRenderer extends ChangeNotifier implements CustomPainter {
       //get the _getMaxWeightsPerVertex()
       _getMaxWeightsPerVertex(tempVertices, oSkinWeights);
 
-      final List<Math.Vector3> bonedVertices = List();
-      final List<Math.Vector3> tempNormals2 = List();
+      final List<Math.Vector3> bonedVertices = [];
+      final List<Math.Vector3> tempNormals2 = [];
 
       for (int index = 0; index < tempVertices.length; index++) {
         final skinIndexX = oSkinIndices[index].x;
@@ -541,9 +535,9 @@ class Fbx3DRenderer extends ChangeNotifier implements CustomPainter {
 
       verticesCount += bonedVertices.length;
 
-      final List<double> newPoints = List();
-      final List<double> newNormals = List();
-      final List<double> newUVs = List();
+      final List<double> newPoints = [];
+      final List<double> newNormals = [];
+      final List<double> newUVs = [];
 
       for (int index = 0; index < bonedVertices.length; index++) {
         newPoints.add(bonedVertices[index].x);
@@ -563,9 +557,9 @@ class Fbx3DRenderer extends ChangeNotifier implements CustomPainter {
       final Float32List nNormals = Float32List.fromList(newNormals);
       final Float32List nUVs = Float32List.fromList(newUVs);
 
-      final List<Math.Vector3> vertices = List();
-      final List<Math.Vector3> normals = List();
-      final List<Math.Vector2> uvs = List();
+      final List<Math.Vector3> vertices = [];
+      final List<Math.Vector3> normals = [];
+      final List<Math.Vector2> uvs = [];
 
       for (int index = 0; index < oIndices.length; index += 3) {
         Math.Vector3 v1 = _transformVertex(Math.Vector3(nPoints[oIndices[index] * 3], nPoints[oIndices[index] * 3 + 1], nPoints[oIndices[index] * 3 + 2]));
@@ -666,7 +660,7 @@ class Fbx3DRenderer extends ChangeNotifier implements CustomPainter {
   refresh() => notifyListeners();
 
   reset() {
-    if (widget.fbx3DViewerController != null) widget.fbx3DViewerController.reset();
+ widget.fbx3DViewerController.reset();
   }
 
   @override

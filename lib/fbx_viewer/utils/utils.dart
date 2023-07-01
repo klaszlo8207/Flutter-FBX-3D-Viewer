@@ -5,8 +5,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/screen_utils.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/utils/screen_utils.dart';
 
 import 'package:vector_math/vector_math.dart' as Math;
 
@@ -32,7 +31,7 @@ Offset gen2DPointFrom3D(Math.Vector3 v) {
   return Offset(vn.x, vn.y);
 }
 
-Color randomColor({double opacity}) => Color((Random().nextDouble() * 0xFFFFFF).toInt() << 0).withOpacity(opacity ?? 1.0);
+Color randomColor({required double opacity}) => Color((Random().nextDouble() * 0xFFFFFF).toInt() << 0).withOpacity(opacity ?? 1.0);
 
 int convertABGRtoARGB(int color) {
   int newColor = color;

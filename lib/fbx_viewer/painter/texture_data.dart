@@ -2,25 +2,19 @@ import 'dart:io';
 import 'dart:ui' as UI;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/utils.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/utils/utils.dart';
 
 import 'package:image/image.dart' as IMG;
 
-///
-/// Created by Kozári László in 2020.01.06
-/// lostinwar22@gmail.com
-///
-
 class TextureData {
-  IMG.Image imageIMG;
-  UI.Image imageUI;
-  int width;
-  int height;
+  IMG.Image? imageIMG;
+  UI.Image? imageUI;
+  int? width;
+  int? height;
 
-  load(BuildContext context,String path, {int resizeWidth}) async {
-    ByteData imageData;
+  Future<void> load(BuildContext context, String path, {int? resizeWidth}) async {
+    late ByteData imageData;
 
     if (path.startsWith("assets/"))
       imageData = await rootBundle.load(path);
@@ -33,11 +27,11 @@ class TextureData {
 
     final buffer = imageData.buffer;
     final imageInBytes = buffer.asUint8List(imageData.offsetInBytes, imageData.lengthInBytes);
-    IMG.Image resized = IMG.copyResize(IMG.decodeImage(imageInBytes), width: resizeWidth);
+    IMG.Image resized = IMG.copyResize(IMG.decodeImage(imageInBytes)!, width: resizeWidth);
 
     imageIMG = resized;
-    width = imageIMG.width;
-    height = imageIMG.height;
+    width = imageIMG!.width;
+    height = imageIMG!.height;
 
     imageUI = await ImageLoader.loadImage(context, path);
   }
@@ -46,9 +40,9 @@ class TextureData {
     if (imageIMG == null) {
       return Colors.white;
     }
-    int u = ((tu * width).toInt() % width).abs();
-    int v = ((tv * height).toInt() % height).abs();
+    int u = ((tu * width!).toInt() % width!).abs();
+    int v = ((tv * height!).toInt() % height!).abs();
 
-    return Color(convertABGRtoARGB(imageIMG.getPixel(u, v)));
+    return Color(convertABGRtoARGB(imageIMG!.getPixel(u, v) as int));
   }
 }

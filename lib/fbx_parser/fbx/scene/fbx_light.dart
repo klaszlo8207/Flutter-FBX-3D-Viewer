@@ -15,19 +15,19 @@ class FbxLight extends FbxNodeAttribute {
   static const int QUADRATIC_DECAY = 2;
   static const int CUBIC_DECAY = 3;
 
-  FbxProperty color;
-  FbxProperty intensity;
-  FbxProperty coneAngle;
-  FbxProperty decay;
-  FbxProperty lightType;
+  late FbxProperty color;
+  late FbxProperty intensity;
+  late FbxProperty coneAngle;
+  late FbxProperty decay;
+  late FbxProperty lightType;
 
   FbxLight(int id, String name, FbxElement element, FbxScene scene)
     : super(id, name, 'Light', element, scene) {
-    color = addProperty('Color', Vector3(1.0, 1.0, 1.0));
-    intensity = addProperty('Intensity', 1.0);
-    coneAngle = addProperty('Cone angle', 1.0);
-    decay = addProperty('Decay', NO_DECAY);
-    lightType = addProperty('LightType', DIRECTIONAL);
+    color = addProperty('Color', Vector3(1.0, 1.0, 1.0))!;
+    intensity = addProperty('Intensity', 1.0)!;
+    coneAngle = addProperty('Cone angle', 1.0)!;
+    decay = addProperty('Decay', NO_DECAY)!;
+    lightType = addProperty('LightType', DIRECTIONAL)!;
 
     for (final c in element.children) {
       if (c.id == 'Properties60') {

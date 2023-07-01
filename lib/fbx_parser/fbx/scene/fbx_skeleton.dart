@@ -10,12 +10,12 @@ class FbxSkeleton extends FbxNode {
   static const LIMB_NODE = 2;
   static const EFFECTOR = 3;
 
-  FbxProperty skeletonType;
+  late FbxProperty skeletonType;
 
   FbxSkeleton(int id, String name, String type, FbxElement element,
               FbxScene scene)
     : super(id, name, type, element, scene) {
-    skeletonType = setProperty('SkeletonType', LIMB);
+    skeletonType = setProperty('SkeletonType', LIMB)!;
 
     switch (type) {
       case 'Root':

@@ -31,7 +31,7 @@ FbxMappingMode stringToMappingMode(String id) {
   } else if (id == 'allsame') {
     return FbxMappingMode.AllSame;
   } else {
-    print('Unhandled Mapping Mode: ${id}');
+    print('Unhandled Mapping Mode: $id');
   }
 
   return FbxMappingMode.None;

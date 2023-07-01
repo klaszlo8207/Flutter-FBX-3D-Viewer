@@ -27,7 +27,7 @@ class FbxBinaryParser extends FbxParser {
   static const int TYPE_STRING = 83; // 'S'
   static const String NAME_SEP = '\x00\x01';
 
-  InputBuffer _input;
+  late InputBuffer _input;
 
   static bool isValidFile(InputBuffer input) {
     final fp = input.offset;
@@ -59,7 +59,7 @@ class FbxBinaryParser extends FbxParser {
   @override
   FbxElement nextElement() {
     if (_input == null) {
-      return null;
+      return FbxElement("");
     }
 
     final endOffset = _input.readUint32();
@@ -67,7 +67,7 @@ class FbxBinaryParser extends FbxParser {
     /*final propLength =*/ _input.readUint32();
 
     if (endOffset == 0) {
-      return null;
+      return FbxElement("");
     }
 
     var elemId = _input.readString(_input.readByte());

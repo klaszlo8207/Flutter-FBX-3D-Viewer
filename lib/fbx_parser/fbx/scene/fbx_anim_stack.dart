@@ -5,19 +5,19 @@ import 'fbx_property.dart';
 import 'fbx_scene.dart';
 
 class FbxAnimStack extends FbxObject {
-  FbxProperty description;
-  FbxProperty localStart;
-  FbxProperty localStop;
-  FbxProperty referenceStart;
-  FbxProperty referenceStop;
+  late FbxProperty description;
+  late FbxProperty localStart;
+  late FbxProperty localStop;
+  late FbxProperty referenceStart;
+  late FbxProperty referenceStop;
 
   FbxAnimStack(int id, String name, FbxElement element, FbxScene scene)
     : super(id, name, 'AnimStack', element, scene) {
-    description = addProperty('Description', '');
-    localStart = addProperty('LocalStart', 0);
-    localStop = addProperty('LocalStop', 0);
-    referenceStart = addProperty('ReferenceStart', 0);
-    referenceStop = addProperty('ReferenceStop', 0);
+    description = addProperty('Description', '')!;
+    localStart = addProperty('LocalStart', 0)!;
+    localStop = addProperty('LocalStop', 0)!;
+    referenceStart = addProperty('ReferenceStart', 0)!;
+    referenceStop = addProperty('ReferenceStop', 0)!;
 
     for (final c in element.children) {
       if (c.id == 'Properties70') {

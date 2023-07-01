@@ -8,8 +8,7 @@ import 'fbx_scene.dart';
 import 'package:vector_math/vector_math.dart';
 
 class FbxAnimEvaluator extends FbxObject {
-  FbxAnimEvaluator(FbxScene scene)
-    : super(0, '', 'AnimEvaluator', null, scene);
+  FbxAnimEvaluator(super.id, super.name, super.type, super.element, super.scene);
 
   Matrix4 getNodeGlobalTransform(FbxNode node, double time) {
     var t = getNodeLocalTransform(node, time);
@@ -48,15 +47,15 @@ class FbxAnimEvaluator extends FbxObject {
       final ap = animNode.properties;
 
       if (ap.containsKey('X')) {
-        tx = evalCurve(ap['X'].connectedFrom as FbxAnimCurve, time);
+        tx = evalCurve(ap['X']!.connectedFrom as FbxAnimCurve, time);
       }
 
       if (ap.containsKey('Y')) {
-        ty = evalCurve(ap['Y'].connectedFrom as FbxAnimCurve, time);
+        ty = evalCurve(ap['Y']!.connectedFrom as FbxAnimCurve, time);
       }
 
       if (ap.containsKey('Z')) {
-        tz = evalCurve(ap['Z'].connectedFrom as FbxAnimCurve, time);
+        tz = evalCurve(ap['Z']!.connectedFrom as FbxAnimCurve, time);
       }
     }
 
@@ -67,15 +66,15 @@ class FbxAnimEvaluator extends FbxObject {
       final ap = animNode.properties;
 
       if (ap.containsKey('X')) {
-        rx = evalCurve(ap['X'].connectedFrom as FbxAnimCurve, time);
+        rx = evalCurve(ap['X']!.connectedFrom as FbxAnimCurve, time);
       }
 
       if (ap.containsKey('Y')) {
-        ry = evalCurve(ap['Y'].connectedFrom as FbxAnimCurve, time);
+        ry = evalCurve(ap['Y']!.connectedFrom as FbxAnimCurve, time);
       }
 
       if (ap.containsKey('Z')) {
-        rz = evalCurve(ap['Z'].connectedFrom as FbxAnimCurve, time);
+        rz = evalCurve(ap['Z']!.connectedFrom as FbxAnimCurve, time);
       }
     }
 
@@ -86,15 +85,15 @@ class FbxAnimEvaluator extends FbxObject {
       final ap = animNode.properties;
 
       if (ap.containsKey('X')) {
-        sx = evalCurve(ap['X'].connectedFrom as FbxAnimCurve, time);
+        sx = evalCurve(ap['X']!.connectedFrom as FbxAnimCurve, time);
       }
 
       if (ap.containsKey('Y')) {
-        sy = evalCurve(ap['Y'].connectedFrom as FbxAnimCurve, time);
+        sy = evalCurve(ap['Y']!.connectedFrom as FbxAnimCurve, time);
       }
 
       if (ap.containsKey('Z')) {
-        sz = evalCurve(ap['Z'].connectedFrom as FbxAnimCurve, time);
+        sz = evalCurve(ap['Z']!.connectedFrom as FbxAnimCurve, time);
       }
     }
 

@@ -8,21 +8,21 @@ import 'package:vector_math/vector_math.dart';
 
 
 class FbxNode extends FbxObject {
-  FbxProperty translate;
-  FbxProperty rotate;
-  FbxProperty scale;
-  FbxProperty visibility;
-  Matrix4 transform;
-  double evalTime;
-  FbxNode parent;
-  List<FbxNode> children = [];
+  late FbxProperty translate;
+  late FbxProperty rotate;
+  late FbxProperty scale;
+  late FbxProperty visibility;
+  late Matrix4 transform;
+  late double evalTime;
+  late FbxNode parent;
+  late List<FbxNode> children = [];
 
   FbxNode(int id, String name, String type, FbxElement element, FbxScene scene)
     : super(id, name, type, element, scene) {
-    translate = addProperty('Lcl Translation', Vector3(0.0, 0.0, 0.0));
-    rotate = addProperty('Lcl Rotation', Vector3(0.0, 0.0, 0.0));
-    scale = addProperty('Lcl Scaling', Vector3(1.0, 1.0, 1.0));
-    visibility = addProperty('Visibility', 1);
+    translate = addProperty('Lcl Translation', Vector3(0.0, 0.0, 0.0))!;
+    rotate = addProperty('Lcl Rotation', Vector3(0.0, 0.0, 0.0))!;
+    scale = addProperty('Lcl Scaling', Vector3(1.0, 1.0, 1.0))!;
+    visibility = addProperty('Visibility', 1)!;
 
     for (final c in element.children) {
       if (c.id == 'Properties70') {
@@ -79,9 +79,7 @@ class FbxNode extends FbxObject {
   Matrix4 localTransform() => transform;
 
   Matrix4 globalTransform() {
-    if (parent != null) {
-      return (parent.globalTransform() * localTransform()) as Matrix4;
-    }
+    return (parent.globalTransform() * localTransform()) as Matrix4;
     return localTransform();
   }
 
