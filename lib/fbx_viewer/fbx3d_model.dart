@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_fbx3d_viewer/fbx_parser/fbx.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/fbx3d_object.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_parser/fbx.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/fbx3d_object.dart';
 
 import 'utils/logger.dart';
 

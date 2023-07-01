@@ -1,4 +1,4 @@
-library flutter_fbx3d_viewer;
+library flutter_fbx3d_viewer_v2;
 
 import 'dart:async';
 import 'dart:io';
@@ -6,11 +6,11 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/painter/globals.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/painter/texture_data.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/painter/vertices_painter.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/converter.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/utils.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/painter/globals.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/painter/texture_data.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/painter/vertices_painter.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/utils/converter.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/utils/utils.dart';
 import 'package:vector_math/vector_math.dart' as Math;
 
 import 'fbx3d_viewer.dart';

@@ -2,9 +2,9 @@ import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/painter/texture_data.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/math_utils.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/utils.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/painter/texture_data.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/utils/math_utils.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/utils/utils.dart';
 import 'package:vector_math/vector_math.dart' as Math;
 import 'package:flutter/rendering.dart';
 

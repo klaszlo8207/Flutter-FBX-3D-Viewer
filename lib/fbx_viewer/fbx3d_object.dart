@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:flutter_fbx3d_viewer/fbx_parser/fbx.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_parser/fbx.dart';
 import 'package:vector_math/vector_math.dart';
 
 class Fbx3DObject {

@@ -3,7 +3,7 @@ import 'dart:ui' as UI;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_fbx3d_viewer/fbx_viewer/utils/utils.dart';
+import 'package:flutter_fbx3d_viewer_v2/fbx_viewer/utils/utils.dart';
 
 import 'package:image/image.dart' as IMG;
 
